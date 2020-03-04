@@ -1,14 +1,13 @@
 function lowerGen() {
   var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   var pick = Math.floor(Math.random() * 24);
-  console.log(pick);
   return (alphabet[pick]);
 }
 
 function upperGen() {
-  var up = lowerGen();
-  up = up.toUpperCase();
-  return (up);
+  var upper = lowerGen();
+  upper = upper.toUpperCase();
+  return (upper);
 }
 
 function numGen() {
@@ -24,52 +23,41 @@ function symbolGen() {
 }
 
 function generatePassword() {
-
-  var parameters = [];
-  var passLength = 0;
-
-  while (passLength === 0) {
-    var passLength = prompt("Length of password", 10);
-    if(passLength===0){
-      
-    }
-  }
-  
-  //loop to ensure at least one parameter is selected
-  do {
-    //input wanted parametes for password
-    var choice = {
-      "lower": confirm("Do you want lowercase?"),
-      "upper": confirm("Do you want uppercase?"),
-      "num": confirm("Do you want numbers?"),
-      "symbol": confirm("Do you want symbols?")
-    }
-    //determine which functions need to be run for password generation
-    if (choice.lower) {
+  var passLength = document.getElementById("passLength").value;
+  //length check 8-128
+  if (passLength > 7 && passLength <= 128) {
+    var parameters = [];
+    //adds functions to array based on user choice
+    if (document.getElementById("lower").checked) {
       parameters.push(lowerGen);
     }
-    if (choice.upper) {
+
+    if (document.getElementById("upper").checked) {
       parameters.push(upperGen);
     }
-    if (choice.num) {
+    if (document.getElementById("num").checked) {
       parameters.push(numGen);
     }
-    if (choice.symbol) {
+    if (document.getElementById("symbol").checked) {
       parameters.push(symbolGen);
     }
     //message if none are selected
     if (parameters.length === 0) {
-      alert("You must select at least one parameter for the password\nTry again!");
+      return ("You must select at least one parameter for the password\nTry again!");
     }
+  }
+  //message if length is out of bounds
+  else {
+    return ("Choose a valid length");
+  }
 
-  } while (parameters.length === 0);
   var pass = "";
-
+  //randomly chooses which function will be run for each character of password
   for (var i = 0; i < passLength; i++) {
     var rnd = Math.floor(Math.random() * parameters.length);
     pass = pass.concat(parameters[rnd]());
   }
-
+  console.log(pass);
   return (pass);
 }
 // Assignment Code
