@@ -82,6 +82,12 @@ function copyButton() {
   alert("Copied password to clipboard");
 }
 
-// Add event listener to generate button
+// Add event listener to generate button for mouse click and enter key
 generateBtn.addEventListener("click", writePassword);
+document.addEventListener("keypress", function(event){
+  if(event.which === 13){
+    generateBtn.click();
+  }
+});
+//event listener for copy button
 copyBtn.addEventListener("click", copyButton);
