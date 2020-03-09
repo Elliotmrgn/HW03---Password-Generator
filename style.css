@@ -72,6 +72,14 @@ header {
   clear: both;
 }
 
+#copyBtn{
+  display: none;
+  transform: translate(-8px, -40px);
+  background: white;
+  border: none;
+  color: darkgrey;
+}
+
 .btn {
   border: none;
   background-color: hsl(360, 91%, 36%);

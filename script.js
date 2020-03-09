@@ -25,13 +25,12 @@ function symbolGen() {
 function generatePassword() {
   var passLength = document.getElementById("passLength").value;
   //length check 8-128
-  if (passLength > 7 && passLength <= 128) {
+  if (passLength >= 8 && passLength <= 128) {
     var parameters = [];
     //adds functions to array based on user choice
     if (document.getElementById("lower").checked) {
       parameters.push(lowerGen);
     }
-
     if (document.getElementById("upper").checked) {
       parameters.push(upperGen);
     }
@@ -52,6 +51,8 @@ function generatePassword() {
   }
 
   var pass = "";
+  //displays the copy button
+  copyBtn.style.display = "inline-block";
   //randomly chooses which function will be run for each character of password
   for (var i = 0; i < passLength; i++) {
     var rnd = Math.floor(Math.random() * parameters.length);
@@ -60,17 +61,27 @@ function generatePassword() {
   console.log(pass);
   return (pass);
 }
+
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+var copyBtn = document.getElementById("copyBtn");
+
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
-
+  
+  
+}
+//copy to clipboard button
+function copyButton() {
+  document.querySelector("#password").select();
+  document.execCommand('copy');
+  alert("Copied password to clipboard");
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+copyBtn.addEventListener("click", copyButton);

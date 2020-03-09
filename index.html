@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="wrapper">
+    <div class="wrapper"> 
         <header>
             <h1>Password Generator</h1>
         </header>
@@ -20,9 +20,10 @@
                 <h2>Generate a Password</h2>
             </div>
 
-            <div class="card-body">
+            <div class="card-body" id="copy">
                 <textarea readonly id="password" placeholder="Your Secure Password"
                     aria-label="Generated Password"></textarea>
+                <button id="copyBtn" class="float-right">Copy</button>
             </div>
 
             <div>
