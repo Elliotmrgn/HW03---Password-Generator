@@ -42,18 +42,19 @@ function generatePassword() {
     }
     //message if none are selected
     if (parameters.length === 0) {
+      copyBtn.style.display = "none";
       return ("You must select at least one parameter for the password\nTry again!");
     }
   }
   //message if length is out of bounds
   else {
+    copyBtn.style.display = "none";
     return ("Choose a valid length");
   }
-
-  var pass = "";
   //displays the copy button
   copyBtn.style.display = "inline-block";
   //randomly chooses which function will be run for each character of password
+  var pass = "";
   for (var i = 0; i < passLength; i++) {
     var rnd = Math.floor(Math.random() * parameters.length);
     pass = pass.concat(parameters[rnd]());
@@ -61,27 +62,22 @@ function generatePassword() {
   console.log(pass);
   return (pass);
 }
-
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 var copyBtn = document.getElementById("copyBtn");
-
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
-  
-  
 }
-//copy to clipboard button
+//copy password to clipboard
 function copyButton() {
   document.querySelector("#password").select();
   document.execCommand('copy');
   alert("Copied password to clipboard");
 }
-
 // Add event listener to generate button for mouse click and enter key
 generateBtn.addEventListener("click", writePassword);
 document.addEventListener("keypress", function(event){
